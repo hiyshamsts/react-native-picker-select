@@ -75,12 +75,20 @@ export default class RNPickerSelect extends PureComponent {
 
    onValueChange(value, index) {
     // console.tron.log(this.state.items[index]);
-    this.props.onValueChange(value, 
+     if (this.props.isFollower) {
+        this.props.onValueChange(value, 
                              this.state.items[index].label, 
                              index, 
                              this.state.items[index].accType ?  this.state.items[index].accType : null,
                              this.state.items[index].accValue ?  this.state.items[index].accValue : null
                             );
+     } else {
+        this.props.onValueChange(value, 
+                             this.state.items[index].label, 
+                             index, 
+                             this.state.items[index].profitSharingMap ?  this.state.items[index].profitSharingMap : null,
+                            );
+     }
 
     this.setState({
       selectedItem: this.state.items[index]
@@ -296,6 +304,7 @@ RNPickerSelect.propTypes = {
   mode: PropTypes.string,
   onUpArrow: PropTypes.func,
   onDownArrow: PropTypes.func,
+  isFollower: PropTypes.bool
 };
 
 RNPickerSelect.defaultProps = {
