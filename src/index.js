@@ -73,11 +73,12 @@ export default class RNPickerSelect extends PureComponent {
     });
   }
 
-  onValueChange(value, index) {
-    this.props.onValueChange(value, index);
+   onValueChange(value, index) {
+    // console.tron.log(this.state.items[index]);
+    this.props.onValueChange(value, this.state.items[index].label, index);
 
     this.setState({
-      selectedItem: this.state.items[index],
+      selectedItem: this.state.items[index]
     });
   }
 
