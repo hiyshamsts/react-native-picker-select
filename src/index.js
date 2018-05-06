@@ -73,26 +73,36 @@ export default class RNPickerSelect extends PureComponent {
     });
   }
 
-   onValueChange(value, index) {
-    // console.tron.log(this.state.items[index]);
-     if (this.props.isFollower) {
-        this.props.onValueChange(value, 
-                             this.state.items[index].label, 
-                             index, 
-                             this.state.items[index].accType ?  this.state.items[index].accType : null,
-                             this.state.items[index].accValue ?  this.state.items[index].accValue : null
-                            );
-     } else {
-        this.props.onValueChange(value, 
-                             this.state.items[index].label, 
-                             index, 
-                             this.state.items[index].profitSharingMap ?  this.state.items[index].profitSharingMap : null,
-                            );
-     }
+  onValueChange(value, index) {
+    // console.tron.log({ value });
+    // console.tron.log({ slctedValue: this.state.selectedItem.value });
+    let selItem = (selItem = this.state.selectedItem.value);
+    if (selItem === undefined) {
+      selItem = null;
+    }
 
-    this.setState({
-      selectedItem: this.state.items[index]
-    });
+    if (value !== selItem) {
+      if (this.props.isFollower) {
+        this.props.onValueChange(
+          value,
+          this.state.items[index].label,
+          index,
+          this.state.items[index].accType ? this.state.items[index].accType : null,
+          this.state.items[index].accValue ? this.state.items[index].accValue : null
+        );
+      } else {
+        this.props.onValueChange(
+          value,
+          this.state.items[index].label,
+          index,
+          this.state.items[index].profitSharingMap ? this.state.items[index].profitSharingMap : null
+        );
+      }
+
+      this.setState({
+        selectedItem: this.state.items[index]
+      });
+    }
   }
 
   togglePicker(animate = false) {
